@@ -1,799 +1,847 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-slate-50">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bahasa Indonesia 60-Day Master with Bebek Budi 🦆</title>
-  
-  <!-- Tailwind CSS -->
+  <title>Bebek Budi - 60-Day Bahasa Indonesia Master</title>
+  <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            duckYellow: '#FCD34D',
+            duckOrange: '#F97316',
+            duckGreen: '#10B981',
+            duckDark: '#1E293B'
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
+    .duck-bounce { animation: bounce 2s infinite; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
-    .font-duck {
-      font-family: 'Fredoka', cursive, sans-serif;
-    }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: #F1F5F9;
-      border-radius: 9999px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #CBD5E1;
-      border-radius: 9999px;
-    }
-    @keyframes bobble {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-6px) rotate(3deg); }
-    }
-    .animate-bobble {
-      animation: bobble 3s ease-in-out infinite;
-    }
-    .flashcard-inner {
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-    }
-    .flashcard.flipped .flashcard-inner {
-      transform: rotateY(180deg);
-    }
-    .flashcard-front, .flashcard-back {
-      backface-visibility: hidden;
-    }
-    .flashcard-back {
-      transform: rotateY(180deg);
+    .quack-pop { animation: pop 0.3s ease-out; }
+    @keyframes pop {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
-<body class="text-slate-800 flex flex-col min-h-screen">
+<body class="bg-amber-50/40 text-slate-800 font-sans min-h-screen flex flex-col justify-between selection:bg-amber-200">
 
-  <header class="bg-amber-400 border-b-4 border-amber-500 sticky top-0 z-40 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      
-      <!-- Mascot Brand -->
-      <div class="flex items-center gap-3 cursor-pointer" onclick="triggerQuack('Selamat datang! I am Bebek Budi! Ready to master Indonesian in 60 days? Kwek!')">
-        <div class="relative group">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-2xl flex items-center justify-center text-2xl sm:text-3xl shadow-md border-2 border-amber-500 animate-bobble transform group-hover:scale-105 transition-transform">
-            🦆
-          </div>
-          <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 border border-white"></span>
-          </span>
+  <!-- TOP NAVIGATION HEADER -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-amber-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('dashboard')">
+        <div class="w-11 h-11 bg-amber-400 rounded-full flex items-center justify-center text-2xl shadow-inner duck-bounce">
+          🦆
         </div>
-
         <div>
-          <div class="flex items-center gap-2">
-            <h1 class="text-lg sm:text-2xl font-bold font-duck text-slate-900 tracking-tight">Bahasa Master 60</h1>
-            <span class="bg-amber-100 text-amber-900 text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full border border-amber-300 hidden sm:inline-flex items-center gap-1">
-              <span>🦆 Bebek Budi</span>
-            </span>
-          </div>
-          <p class="text-[10px] sm:text-xs font-semibold text-amber-950/80">60-Day Full Intermediate Mastery</p>
+          <h1 class="font-bold text-lg leading-tight text-slate-800">Bebek Budi <span class="text-amber-500 text-xs px-2 py-0.5 bg-amber-100 rounded-full font-semibold">60-Day Master</span></h1>
+          <p class="text-xs text-slate-500">Learn Bahasa Indonesia step-by-step!</p>
         </div>
       </div>
 
-      <!-- User Stats Badges -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <!-- Streak -->
-        <div class="bg-white/90 backdrop-blur px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl border border-amber-300 shadow-sm flex items-center gap-1.5">
-          <span class="text-base sm:text-lg">🔥</span>
-          <div class="text-left">
-            <div class="text-[9px] sm:text-[10px] uppercase font-bold text-slate-500 tracking-wider">Streak</div>
-            <div class="text-xs sm:text-sm font-bold font-duck text-amber-700 leading-none" id="user-streak">1 Day</div>
-          </div>
+      <!-- STATS BAR -->
+      <div class="flex items-center space-x-3 text-sm">
+        <div class="flex items-center space-x-1.5 bg-amber-100/70 border border-amber-200 px-3 py-1.5 rounded-xl">
+          <span class="text-amber-600 font-bold">🔥</span>
+          <span id="streakCount" class="font-bold text-amber-900">1</span>
+          <span class="text-xs text-amber-700 font-medium hidden sm:inline">Days</span>
         </div>
-
-        <!-- Feather XP -->
-        <div class="bg-white/90 backdrop-blur px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl border border-amber-300 shadow-sm flex items-center gap-1.5">
-          <span class="text-base sm:text-lg">🪶</span>
-          <div class="text-left">
-            <div class="text-[9px] sm:text-[10px] uppercase font-bold text-slate-500 tracking-wider">XP</div>
-            <div class="text-xs sm:text-sm font-bold font-duck text-amber-600 leading-none" id="user-xp">0 XP</div>
-          </div>
+        <div class="flex items-center space-x-1.5 bg-orange-100/70 border border-orange-200 px-3 py-1.5 rounded-xl">
+          <span class="text-orange-500 font-bold">🪶</span>
+          <span id="userFeathers" class="font-bold text-orange-900">0</span>
+          <span class="text-xs text-orange-700 font-medium hidden sm:inline">Feathers</span>
         </div>
-
-        <!-- Quack Trigger -->
-        <button onclick="triggerQuack()" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-duck font-bold px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-xs sm:text-sm transition-all shadow-sm flex items-center gap-1.5 border-2 border-amber-600 active:scale-95">
-          <span class="text-base">📢</span>
-          <span class="hidden md:inline">Quack!</span>
-        </button>
       </div>
     </div>
+
+    <!-- MAIN TAB NAVIGATION -->
+    <nav class="bg-amber-100/50 border-t border-amber-200/60 px-2 py-1">
+      <div class="max-w-6xl mx-auto flex items-center justify-around sm:justify-start sm:space-x-4 text-xs sm:text-sm font-medium">
+        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="tab-btn px-3 py-2 rounded-lg text-amber-900 bg-amber-200/80 font-semibold flex items-center space-x-1.5">
+          <span>📅</span> <span>60-Day Curriculum</span>
+        </button>
+        <button onclick="switchTab('flashcards')" id="nav-flashcards" class="tab-btn px-3 py-2 rounded-lg text-slate-600 hover:text-amber-900 hover:bg-amber-100 flex items-center space-x-1.5">
+          <span>🃏</span> <span>Word Bank</span>
+        </button>
+        <button onclick="switchTab('simulator')" id="nav-simulator" class="tab-btn px-3 py-2 rounded-lg text-slate-600 hover:text-amber-900 hover:bg-amber-100 flex items-center space-x-1.5">
+          <span>💬</span> <span>Roleplay Sim</span>
+        </button>
+        <button onclick="switchTab('duckroom')" id="nav-duckroom" class="tab-btn px-3 py-2 rounded-lg text-slate-600 hover:text-amber-900 hover:bg-amber-100 flex items-center space-x-1.5">
+          <span>🦆</span> <span>Budi's Nest</span>
+        </button>
+      </div>
+    </nav>
   </header>
 
-  <!-- Mascot Speech Bubble Popup Bar -->
-  <div id="quack-bubble-container" class="bg-amber-100 border-b border-amber-300 px-4 py-2.5 transition-all hidden">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <span class="text-2xl animate-bounce">🦆</span>
-        <div class="text-xs sm:text-sm font-semibold text-amber-950 font-duck" id="quack-bubble-text">
-          "Kwek kwek! Welcome to Day 1 of your 60-day journey!"
-        </div>
-      </div>
-      <button onclick="closeQuackBubble()" class="text-amber-800 hover:text-amber-950 text-xs font-bold px-2 py-1 bg-amber-200 hover:bg-amber-300 rounded-lg">
-        Dismiss ✖
-      </button>
-    </div>
-  </div>
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="max-w-6xl mx-auto w-full px-4 py-6 flex-grow">
 
-  <!-- Main Grid Layout -->
-  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-4 sm:py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-4 gap-6">
-
-    <!-- Sidebar Navigation & Day Selector -->
-    <aside class="lg:col-span-1 space-y-4">
+    <!-- ==================== TAB 1: CURRICULUM DASHBOARD ==================== -->
+    <div id="tab-dashboard" class="tab-content">
       
-      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 space-y-3">
-        <div class="text-xs font-bold uppercase text-slate-400 px-1 tracking-wider">Navigation</div>
-        
-        <div class="grid grid-cols-2 lg:grid-cols-1 gap-2">
-          <button onclick="switchTab('curriculum')" id="tab-btn-curriculum" class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-amber-500 text-slate-900 shadow-sm">
-            <i data-lucide="book-open" class="w-4 h-4"></i>
-            <span>60-Day Curriculum</span>
-          </button>
-
-          <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:bg-slate-100">
-            <i data-lucide="layers" class="w-4 h-4"></i>
-            <span>Flashcards Bank</span>
-          </button>
-
-          <button onclick="switchTab('bargain')" id="tab-btn-bargain" class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:bg-slate-100">
-            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-            <span>Pasar Bargain Sim</span>
-          </button>
-
-          <button onclick="switchTab('register')" id="tab-btn-register" class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:bg-slate-100">
-            <i data-lucide="repeat" class="w-4 h-4"></i>
-            <span>Formal vs Gaul</span>
-          </button>
+      <!-- HERO MASCOT BANNER -->
+      <div class="bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-300 rounded-2xl p-5 sm:p-6 mb-6 shadow-sm border border-amber-300 relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
+        <div class="z-10 max-w-xl text-center md:text-left mb-4 md:mb-0">
+          <div class="inline-block bg-white/80 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-amber-800 mb-2 shadow-xs">
+            📢 Bebek Budi's Quack of the Day
+          </div>
+          <h2 id="budiQuoteTitle" class="text-xl sm:text-2xl font-black text-slate-900 mb-1">
+            "Sedikit-sedikit, lama-lama menjadi bukit!"
+          </h2>
+          <p id="budiQuoteSub" class="text-xs sm:text-sm text-slate-700 italic">
+            (Little by little, over time it becomes a mountain!)
+          </p>
         </div>
-      </div>
-
-      <!-- 60-Day Jump Selector Grid -->
-      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 space-y-3">
-        <div class="flex items-center justify-between">
-          <div class="text-xs font-bold uppercase text-slate-400 tracking-wider">Select Day (1–60)</div>
-          <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full" id="day-completion-tag">0/60 Done</span>
-        </div>
-
-        <div class="grid grid-cols-6 sm:grid-cols-10 lg:grid-cols-5 gap-1.5 max-h-56 overflow-y-auto custom-scrollbar p-1" id="day-grid-container">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-
-      <!-- Mascot Tip Card -->
-      <div class="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-2xl p-4 shadow-sm">
-        <div class="flex items-start gap-3">
-          <span class="text-3xl">🦆</span>
+        <div class="z-10 flex items-center space-x-3 bg-white/90 backdrop-blur p-3 rounded-2xl border border-amber-200 shadow-xs">
+          <div class="text-4xl text-center">🦆</div>
           <div>
-            <h4 class="font-duck font-bold text-amber-900 text-xs sm:text-sm">Bebek Budi's Wisdom</h4>
-            <p class="text-xs text-amber-800 mt-1 leading-relaxed" id="duck-daily-tip">
-              "Did you know Bahasa Indonesia has no verb conjugations? 'Saya makan' works for yesterday, today, and tomorrow!"
-            </p>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Main Content Display -->
-    <main class="lg:col-span-3 space-y-6">
-
-      <!-- VIEW 1: CURRICULUM DAY LESSON VIEW -->
-      <section id="view-curriculum" class="space-y-6">
-        
-        <!-- Day Banner Header -->
-        <div class="bg-slate-900 text-white rounded-2xl p-5 sm:p-6 shadow-md relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-4 border-amber-500">
-          <div class="relative z-10 space-y-1.5">
-            <div class="flex items-center gap-2">
-              <span class="px-2.5 py-0.5 bg-amber-400 text-slate-950 font-bold text-[10px] uppercase rounded-full tracking-wide" id="lesson-category-badge">
-                Beginner Basics
-              </span>
-              <span class="text-xs text-slate-300 font-medium" id="lesson-week-tag">Week 1 • Day 1</span>
-            </div>
-            <h2 class="text-xl sm:text-3xl font-duck text-amber-400" id="lesson-title">
-              Day 1: Greetings & Politeness Code
-            </h2>
-            <p class="text-slate-300 text-xs sm:text-sm max-w-2xl leading-relaxed" id="lesson-subtitle">
-              Master daily greetings, time-based salutations, and essential polite gestures used in Indonesia.
-            </p>
-          </div>
-          
-          <div class="flex items-center gap-2 sm:gap-3">
-            <button onclick="markDayCompleted()" id="complete-day-btn" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition-all flex items-center gap-2 shadow-sm border-b-2 border-emerald-700">
-              <i data-lucide="check-circle" class="w-4 h-4"></i>
-              <span>Mark Complete</span>
+            <button onclick="triggerQuack()" class="bg-amber-500 hover:bg-amber-600 active:scale-95 text-white font-bold px-3 py-1.5 rounded-xl text-xs flex items-center space-x-1 shadow-sm transition">
+              <span>🔊</span> <span>Ask Budi for Wisdom!</span>
             </button>
+            <p id="quackText" class="text-[11px] text-slate-500 mt-1 italic text-center">"Kwek kwek! Keep going!"</p>
           </div>
         </div>
+      </div>
 
-        <!-- Lesson Must-Learn Concept / Grammar Overview -->
-        <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-3">
-          <h3 class="font-bold text-slate-900 text-base sm:text-lg flex items-center gap-2 font-duck">
-            <i data-lucide="compass" class="w-5 h-5 text-amber-500"></i>
-            <span>Must-Learn Concept & Rules</span>
+      <!-- DAY SELECTION GRID HEADER -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
+        <div>
+          <h3 class="text-lg font-bold text-slate-800 flex items-center space-x-2">
+            <span>📚 Select Day</span>
+            <span id="currentPhaseTag" class="text-xs bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded-full">Phase 1: Beginner</span>
           </h3>
-          <div class="text-xs sm:text-sm text-slate-600 leading-relaxed space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200" id="lesson-concept-body">
-            <!-- Dynamic concept content -->
-          </div>
+          <p class="text-xs text-slate-500">Pick any day from 1 to 60 to access unique lessons, concepts, and quizzes!</p>
         </div>
+        
+        <!-- PHASE FILTER -->
+        <select id="phaseFilter" onchange="renderDayGrid()" class="text-xs bg-white border border-slate-300 rounded-lg px-3 py-2 font-medium shadow-xs focus:ring-2 focus:ring-amber-400 outline-none">
+          <option value="all">All 60 Days</option>
+          <option value="p1">Days 1–14: Beginner & Daily Survival</option>
+          <option value="p2">Days 15–28: Casual / Gaul Slang</option>
+          <option value="p3">Days 29–42: Grammar & Affixes</option>
+          <option value="p4">Days 43–56: Formal & Professional</option>
+          <option value="p5">Days 57–60: Mastery & Culture</option>
+        </select>
+      </div>
 
-        <!-- Daily Key Vocabulary Table -->
-        <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-4">
-          <div class="flex items-center justify-between">
-            <h3 class="font-bold text-slate-900 text-base sm:text-lg flex items-center gap-2 font-duck">
-              <i data-lucide="book-open" class="w-5 h-5 text-amber-500"></i>
-              <span>Key Vocabulary & Phrase Patterns</span>
-            </h3>
-            <span class="text-[10px] sm:text-xs bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-full">Tap 🔊 to listen</span>
-          </div>
+      <!-- 60-DAY JUMP GRID -->
+      <div id="dayGrid" class="grid grid-cols-5 sm:grid-cols-10 gap-2 mb-8 bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
+        <!-- Javascript dynamically populates days 1-60 buttons -->
+      </div>
 
-          <div class="overflow-x-auto custom-scrollbar">
-            <table class="w-full text-left border-collapse text-xs sm:text-sm">
-              <thead>
-                <tr class="bg-slate-100 text-slate-700 font-bold uppercase text-[10px] tracking-wider">
-                  <th class="p-3 rounded-l-xl">Indonesian (Formal / Casual)</th>
-                  <th class="p-3">English Translation</th>
-                  <th class="p-3">Context & Usage</th>
-                  <th class="p-3 rounded-r-xl text-center">Audio</th>
-                </tr>
-              </thead>
-              <tbody id="vocab-table-body" class="divide-y divide-slate-100 font-medium">
-                <!-- Dynamic vocab rows -->
-              </tbody>
-            </table>
-          </div>
-        </div>
+      <!-- ACTIVE DAY LESSON CARD CONTAINER -->
+      <div id="lessonContainer" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-7 relative">
+        <!-- Dynamically rendered active day content -->
+      </div>
 
-        <!-- Daily Practice Quiz Engine -->
-        <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-4">
-          <div class="flex items-center justify-between">
-            <h3 class="font-bold text-slate-900 text-base sm:text-lg flex items-center gap-2 font-duck">
-              <i data-lucide="help-circle" class="w-5 h-5 text-amber-500"></i>
-              <span>Daily Practice Quiz</span>
-            </h3>
-            <span class="text-[10px] sm:text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-full" id="quiz-score-badge">0 / 3 Correct</span>
-          </div>
-
-          <div id="quiz-container" class="space-y-4">
-            <!-- Dynamic quiz questions -->
-          </div>
-        </div>
-
-      </section>
-
-      <!-- VIEW 2: FLASHCARDS BANK -->
-      <section id="view-flashcards" class="space-y-6 hidden">
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <h2 class="text-xl sm:text-2xl font-bold font-duck text-slate-900">
-                🎴 Word Bank & Interactive Flashcards
-              </h2>
-              <p class="text-xs text-slate-500">Test your vocabulary memory with flip cards across all 60 days.</p>
-            </div>
-
-            <!-- Search & Category Filter -->
-            <div class="flex items-center gap-2">
-              <input type="text" id="flashcard-search" onkeyup="filterFlashcards()" placeholder="Search word..." class="px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-amber-400 w-full sm:w-48">
-            </div>
-          </div>
-
-          <!-- Flashcard Flip Box Container -->
-          <div class="flex flex-col items-center justify-center py-6 bg-slate-50 rounded-2xl border border-slate-200 space-y-4">
-            <div id="flashcard-element" class="flashcard w-72 h-44 cursor-pointer perspective" onclick="this.classList.toggle('flipped')">
-              <div class="flashcard-inner relative w-full h-full shadow-lg rounded-2xl border-2 border-amber-300 bg-white">
-                
-                <!-- Front -->
-                <div class="flashcard-front absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-                  <span class="text-[10px] uppercase font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full mb-2" id="fc-category">Indonesian</span>
-                  <h3 class="text-xl font-bold text-slate-900 font-duck" id="fc-front-text">Selamat Pagi</h3>
-                  <p class="text-[10px] text-slate-400 mt-2">Tap card to flip 🔄</p>
-                </div>
-
-                <!-- Back -->
-                <div class="flashcard-back absolute inset-0 flex flex-col items-center justify-center p-4 text-center bg-amber-400 text-slate-950 rounded-2xl">
-                  <h4 class="text-lg font-bold font-duck" id="fc-back-text">Good Morning</h4>
-                  <p class="text-xs mt-1 font-medium italic" id="fc-example-text">"Selamat pagi, Pak!"</p>
-                </div>
-
-              </div>
-            </div>
-
-            <!-- Flashcard Navigation Controls -->
-            <div class="flex items-center gap-3">
-              <button onclick="prevFlashcard()" class="p-2 bg-white hover:bg-slate-100 border border-slate-200 rounded-xl text-slate-700 shadow-sm">
-                <i data-lucide="chevron-left" class="w-5 h-5"></i>
-              </button>
-              <span class="text-xs font-bold text-slate-600" id="fc-index-counter">Card 1 / 10</span>
-              <button onclick="nextFlashcard()" class="p-2 bg-white hover:bg-slate-100 border border-slate-200 rounded-xl text-slate-700 shadow-sm">
-                <i data-lucide="chevron-right" class="w-5 h-5"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- VIEW 3: MARKET BARGAINING SIMULATOR -->
-      <section id="view-bargain" class="space-y-6 hidden">
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
-          <div class="flex items-center justify-between border-b pb-4">
-            <div>
-              <h2 class="text-xl font-bold font-duck text-slate-900 flex items-center gap-2">
-                <span>🛒 Pasar Traditional Bargaining Simulator</span>
-              </h2>
-              <p class="text-xs text-slate-500">Practice negotiating prices at an Indonesian market with Bebek Budi coaching you!</p>
-            </div>
-            <span class="text-2xl">🏬</span>
-          </div>
-
-          <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-4">
-            <!-- Mascot Coach Banner -->
-            <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
-              <div class="w-10 h-10 bg-amber-400 rounded-full flex items-center justify-center text-xl font-duck text-slate-900">
-                🦆
-              </div>
-              <div>
-                <div class="text-[10px] font-bold text-amber-400 uppercase tracking-wider">Bebek Budi Coach:</div>
-                <div id="sim-coach-text" class="text-xs text-slate-300">
-                  "Always start by offering 60-70% of the asking price politely! Kwek!"
-                </div>
-              </div>
-            </div>
-
-            <!-- Dialogue History -->
-            <div id="sim-dialogue-log" class="bg-slate-950 p-4 rounded-xl h-52 overflow-y-auto space-y-3 text-xs font-mono custom-scrollbar">
-              <div class="text-amber-400">
-                [Vendor]: "Halo Boss! Batik shirt standard quality, Rp 150.000 saja!"
-              </div>
-            </div>
-
-            <!-- Options Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1" id="sim-options-container">
-              <!-- Options populated by JS -->
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- VIEW 4: FORMAL VS GAUL REGISTER SWITCHER -->
-      <section id="view-register" class="space-y-6 hidden">
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
-          <div>
-            <h2 class="text-xl sm:text-2xl font-bold font-duck text-slate-900 flex items-center gap-2">
-              <span>🔀 Formal vs. Casual Gaul Register Switcher</span>
-            </h2>
-            <p class="text-xs text-slate-500">Understand the dramatic difference between official Indonesian and street Jakartan speech.</p>
-          </div>
-
-          <div class="overflow-x-auto custom-scrollbar">
-            <table class="w-full text-left text-xs sm:text-sm border-collapse">
-              <thead>
-                <tr class="bg-slate-100 text-slate-700 font-bold uppercase text-[10px]">
-                  <th class="p-3 rounded-l-xl">Category</th>
-                  <th class="p-3 text-blue-700 bg-blue-50">Formal / Official Bahasa</th>
-                  <th class="p-3 text-emerald-700 bg-emerald-50">Casual / Gaul Street Speech</th>
-                  <th class="p-3 rounded-r-xl">English Meaning</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-100 font-medium text-xs">
-                <tr>
-                  <td class="p-3 font-bold text-slate-800">I / Me</td>
-                  <td class="p-3 text-blue-900 bg-blue-50/50">Saya / Anda</td>
-                  <td class="p-3 text-emerald-900 bg-emerald-50/50">Gua / Lu (Jakarta Gaul)</td>
-                  <td class="p-3 text-slate-500">I / You</td>
-                </tr>
-                <tr>
-                  <td class="p-3 font-bold text-slate-800">Negation</td>
-                  <td class="p-3 text-blue-900 bg-blue-50/50">Tidak (verbs) / Bukan (nouns)</td>
-                  <td class="p-3 text-emerald-900 bg-emerald-50/50">Gak / Nggak / Kagak</td>
-                  <td class="p-3 text-slate-500">Not / No</td>
-                </tr>
-                <tr>
-                  <td class="p-3 font-bold text-slate-800">Already</td>
-                  <td class="p-3 text-blue-900 bg-blue-50/50">Sudah</td>
-                  <td class="p-3 text-emerald-900 bg-emerald-50/50">Udah / Udahan</td>
-                  <td class="p-3 text-slate-500">Already</td>
-                </tr>
-                <tr>
-                  <td class="p-3 font-bold text-slate-800">Why</td>
-                  <td class="p-3 text-blue-900 bg-blue-50/50">Mengapa</td>
-                  <td class="p-3 text-emerald-900 bg-emerald-50/50">Kenapa / Kok</td>
-                  <td class="p-3 text-slate-500">Why / How come?</td>
-                </tr>
-                <tr>
-                  <td class="p-3 font-bold text-slate-800">Very</td>
-                  <td class="p-3 text-blue-900 bg-blue-50/50">Sangat / Sekali</td>
-                  <td class="p-3 text-emerald-900 bg-emerald-50/50">Banget / Parah</td>
-                  <td class="p-3 text-slate-500">Very / Extremely</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-    </main>
-  </div>
-
-  <!-- Floating Action Mascot FAB -->
-  <button onclick="triggerQuack('Kwek! Don\'t forget to study 15 minutes today!')" class="fixed bottom-6 right-6 bg-amber-400 hover:bg-amber-500 border-2 border-amber-600 p-3.5 rounded-full shadow-2xl transition-all transform hover:scale-110 active:scale-90 z-50 flex items-center gap-2">
-    <span class="text-2xl animate-bobble">🦆</span>
-  </button>
-
-  <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-400 text-xs py-6 border-t border-slate-800 mt-12">
-    <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
-      <p class="font-duck text-sm text-amber-400 flex items-center justify-center gap-1">
-        <span>Bahasa Indonesia 60-Day Master Application</span> • <span>Bebek Budi Edition 🦆</span>
-      </p>
-      <p>Mastering Indonesian from Foundations to Intermediate Gaul & Formal Fluency.</p>
     </div>
+
+    <!-- ==================== TAB 2: FLASHCARD WORD BANK ==================== -->
+    <div id="tab-flashcards" class="tab-content hidden">
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm mb-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-xl font-bold text-slate-800 flex items-center space-x-2">
+              <span>🃏 Vocabulary & Gaul Word Bank</span>
+            </h2>
+            <p class="text-xs text-slate-500">Interactive flashcards with speech audio, translations, and SRS tags.</p>
+          </div>
+          <!-- SEARCH & FILTER BAR -->
+          <div class="flex items-center space-x-2 w-full sm:w-auto">
+            <input type="text" id="vocabSearch" oninput="renderFlashcards()" placeholder="Search word or English..." class="text-xs border border-slate-300 rounded-xl px-3 py-2 w-full sm:w-48 focus:ring-2 focus:ring-amber-400 outline-none">
+            <select id="vocabFilterCategory" onchange="renderFlashcards()" class="text-xs border border-slate-300 rounded-xl px-3 py-2 font-medium focus:ring-2 focus:ring-amber-400 outline-none">
+              <option value="all">All Categories</option>
+              <option value="basics">Basics</option>
+              <option value="gaul">Gaul Slang</option>
+              <option value="food">Food & Dining</option>
+              <option value="travel">Travel & Taxi</option>
+              <option value="grammar">Affixes</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- FLASHCARD GRID -->
+        <div id="flashcardGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Dynamically populated flashcards -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: ROLEPLAY SIMULATOR ==================== -->
+    <div id="tab-simulator" class="tab-content hidden">
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm mb-6 max-w-3xl mx-auto">
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="text-3xl">🏪</div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-800">Indonesian Interactive Simulator</h2>
+            <p class="text-xs text-slate-500">Practice real scenarios: bargaining at markets, taking Gojek, ordering food & emergencies!</p>
+          </div>
+        </div>
+
+        <!-- SCENARIO SELECTOR -->
+        <div class="flex space-x-2 mb-6 overflow-x-auto pb-2">
+          <button onclick="loadScenario('pasar')" id="sim-pasar" class="sim-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-400 text-slate-900 border border-amber-300 whitespace-nowrap">
+            🛍️ Pasar Night Market
+          </button>
+          <button onclick="loadScenario('gojek')" id="sim-gojek" class="sim-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-amber-100 border border-slate-200 whitespace-nowrap">
+            🛵 Gojek Driver
+          </button>
+          <button onclick="loadScenario('warung')" id="sim-warung" class="sim-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-amber-100 border border-slate-200 whitespace-nowrap">
+            🍲 Warung Nasi Goreng
+          </button>
+          <button onclick="loadScenario('emergency')" id="sim-emergency" class="sim-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-amber-100 border border-slate-200 whitespace-nowrap">
+            🏥 Apotek / Clinic
+          </button>
+        </div>
+
+        <!-- CHAT WINDOW -->
+        <div class="bg-amber-50/50 rounded-2xl border border-amber-200/80 p-4 min-h-[320px] flex flex-col justify-between mb-4">
+          <div id="chatMessages" class="space-y-3 overflow-y-auto max-h-[360px] pr-2">
+            <!-- Messages render here -->
+          </div>
+        </div>
+
+        <!-- ACTION CONTROLS -->
+        <div id="chatOptions" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <!-- Dynamic choice buttons -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: BUDI'S NEST ==================== -->
+    <div id="tab-duckroom" class="tab-content hidden">
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm text-center max-w-xl mx-auto">
+        <div class="w-24 h-24 bg-amber-300 border-4 border-amber-400 rounded-full flex items-center justify-center text-5xl mx-auto mb-4 shadow-inner duck-bounce">
+          🦆
+        </div>
+        <h2 class="text-2xl font-black text-slate-800 mb-1">Bebek Budi's Nest</h2>
+        <p class="text-xs text-slate-500 mb-6">Earn feathers 🪶 by finishing daily quizzes and practicing conversation!</p>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6 text-left space-y-2">
+          <h4 class="font-bold text-xs uppercase tracking-wider text-amber-800">Duck Stats & Achievements</h4>
+          <div class="flex justify-between items-center text-sm py-1 border-b border-amber-100">
+            <span>Total Earned Feathers:</span>
+            <span id="nestFeathers" class="font-bold text-amber-700">0 🪶</span>
+          </div>
+          <div class="flex justify-between items-center text-sm py-1 border-b border-amber-100">
+            <span>Current Quack Rank:</span>
+            <span id="duckRank" class="font-bold text-slate-800">🐣 Bebek Kecil (Duckling)</span>
+          </div>
+          <div class="flex justify-between items-center text-sm py-1">
+            <span>Completed Days:</span>
+            <span id="completedDaysCount" class="font-bold text-emerald-600">0 / 60</span>
+          </div>
+        </div>
+
+        <button onclick="playQuackSound()" class="bg-amber-400 hover:bg-amber-500 active:scale-95 text-slate-900 font-bold px-5 py-2.5 rounded-2xl text-sm shadow-md transition">
+          🦆 Quack Loudly for Good Luck!
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400">
+    <p>Bebek Budi 60-Day Bahasa Indonesia App • Powered by HTML & Tailwind CSS</p>
   </footer>
 
+  <!-- APPLICATION LOGIC JAVASCRIPT -->
   <script>
-    // Lucide Icon Initializer
-    lucide.createIcons();
+    // ==========================================
+    // GLOBAL STATE & LOCAL STORAGE
+    // ==========================================
+    let activeDay = 1;
+    let userStreak = parseInt(localStorage.getItem('budi_streak') || '1');
+    let userFeathers = parseInt(localStorage.getItem('budi_feathers') || '0');
+    let completedDays = JSON.parse(localStorage.getItem('budi_completed_days') || '[]');
+    let masteredCards = JSON.parse(localStorage.getItem('budi_mastered_cards') || '[]');
 
-    // APP STATE PERSISTENCE
-    let currentDay = parseInt(localStorage.getItem('indonesia_current_day') || '1');
-    let userXP = parseInt(localStorage.getItem('indonesia_user_xp') || '50');
-    let completedDays = JSON.parse(localStorage.getItem('indonesia_completed_days') || '[]');
-    let userStreak = parseInt(localStorage.getItem('indonesia_user_streak') || '1');
+    // 60-DAY COMPLETE CURRICULUM GENERATOR DATA
+    const curriculumData = {
+      1: {
+        title: "Day 1: Personal Pronouns & Formal vs. Casual",
+        phase: "Phase 1: Beginner",
+        concept: "Indonesian has distinct formal and casual pronouns. 'Saya' is safe everywhere; 'Aku' is for close friends/romance. Never use 'Kamu' with elders or professionals—use 'Bapak' (Mr.) or 'Ibu' (Mrs.).",
+        terms: [
+          { indo: "Saya", english: "I / Me (Formal, universal)", audio: "Saya" },
+          { indo: "Aku", english: "I / Me (Casual, intimate)", audio: "Aku" },
+          { indo: "Anda", english: "You (Formal, polite)", audio: "Anda" },
+          { indo: "Kamu", english: "You (Casual, close friends)", audio: "Kamu" },
+          { indo: "Bapak / Ibu", english: "Sir / Madam (Respectful title)", audio: "Bapak Ibu" }
+        ],
+        quiz: {
+          q: "How would you respectfully say 'I' when speaking to a police officer or manager?",
+          options: ["Aku", "Saya", "Gua", "Kamu"],
+          a: "Saya",
+          explanation: "'Saya' is the standard polite pronoun used in official settings."
+        }
+      },
+      2: {
+        title: "Day 2: Essential Greetings & Social Etiquette",
+        phase: "Phase 1: Beginner",
+        concept: "Greetings depend on the time of day! 'Selamat' means safe/congratulations. Always greet elders politely.",
+        terms: [
+          { indo: "Selamat pagi", english: "Good morning (6 AM - 11 AM)", audio: "Selamat pagi" },
+          { indo: "Selamat siang", english: "Good day / afternoon (11 AM - 3 PM)", audio: "Selamat siang" },
+          { indo: "Selamat sore", english: "Good late afternoon (3 PM - 6 PM)", audio: "Selamat sore" },
+          { indo: "Selamat malam", english: "Good evening / night (6 PM onwards)", audio: "Selamat malam" },
+          { indo: "Terima kasih", english: "Thank you", audio: "Terima kasih" },
+          { indo: "Sama-sama", english: "You're welcome", audio: "Sama sama" }
+        ],
+        quiz: {
+          q: "What greeting should you use at 2:00 PM?",
+          options: ["Selamat pagi", "Selamat siang", "Selamat sore", "Selamat malam"],
+          a: "Selamat siang",
+          explanation: "'Selamat siang' is used during middle afternoon hours (approx 11 AM to 3 PM)."
+        }
+      },
+      3: {
+        title: "Day 3: Numbers & Rupiah Math Basics",
+        phase: "Phase 1: Beginner",
+        concept: "Indonesian Rupiah prices run in thousands! 'Ribu' means thousand, 'Juta' means million. Teen numbers end in 'belas'.",
+        terms: [
+          { indo: "Satu / Dua / Tiga", english: "1 / 2 / 3", audio: "Satu Dua Tiga" },
+          { indo: "Sepuluh", english: "10", audio: "Sepuluh" },
+          { indo: "Tiga belas", english: "13 (-belas = teens)", audio: "Tiga belas" },
+          { indo: "Dua puluh", english: "20 (-puluh = tens)", audio: "Dua puluh" },
+          { indo: "Seribu", english: "1,000 (Se- = one)", audio: "Seribu" },
+          { indo: "Lima puluh ribu", english: "50,000 Rupiah", audio: "Lima puluh ribu" }
+        ],
+        quiz: {
+          q: "Translate the number '15' into Bahasa Indonesia:",
+          options: ["Lima puluh", "Lima belas", "Seribu lima", "Lima ratus"],
+          a: "Lima belas",
+          explanation: "Teen numbers add the suffix 'belas' after the single digit."
+        }
+      },
+      4: {
+        title: "Day 4: The Golden Rule of Negation (Tidak vs. Bukan)",
+        phase: "Phase 1: Beginner",
+        concept: "CRITICAL GRAMMAR RULE: Use 'Tidak' to negate Verbs & Adjectives. Use 'Bukan' to negate Nouns & Noun Phrases!",
+        terms: [
+          { indo: "Tidak", english: "Not (Negates verbs/adjectives)", audio: "Tidak" },
+          { indo: "Bukan", english: "Not / Is not (Negates nouns)", audio: "Bukan" },
+          { indo: "Saya tidak makan", english: "I am not eating (makan = verb)", audio: "Saya tidak makan" },
+          { indo: "Ini bukan kopi", english: "This is not coffee (kopi = noun)", audio: "Ini bukan kopi" }
+        ],
+        quiz: {
+          q: "Which word correctly completes: 'Minuman ini _____ manis' (This drink is NOT sweet)?",
+          options: ["Bukan", "Tidak", "Jangan", "Belum"],
+          a: "Tidak",
+          explanation: "'Manis' (sweet) is an adjective, so you must use 'Tidak'."
+        }
+      },
+      5: {
+        title: "Day 5: Core Root Verbs & Action Phrases",
+        phase: "Phase 1: Beginner",
+        concept: "Basic Indonesian verbs do not conjugate for tense or subject! Just place the root verb after the pronoun.",
+        terms: [
+          { indo: "Makan", english: "To eat", audio: "Makan" },
+          { indo: "Minum", english: "To drink", audio: "Minum" },
+          { indo: "Pergi", english: "To go", audio: "Pergi" },
+          { indo: "Tidur", english: "To sleep", audio: "Tidur" },
+          { indo: "Mau", english: "Want / Intend to", audio: "Mau" }
+        ],
+        quiz: {
+          q: "How do you state: 'I want to go' in standard Indonesian?",
+          options: ["Saya mau pergi", "Saya pergi mau", "Tidak pergi saya", "Pergi aku tidak"],
+          a: "Saya mau pergi",
+          explanation: "Subject + Modal (Mau) + Verb (Pergi) follows clear, fixed word order."
+        }
+      },
+      6: {
+        title: "Day 6: Ordering Food at Warung & Restaurants",
+        phase: "Phase 1: Beginner",
+        concept: "At local eateries, 'Bungkus' means takeaway/to-go, while 'Makan di sini' means eat-in. 'Porsi' means portion.",
+        terms: [
+          { indo: "Nasi goreng", english: "Fried rice", audio: "Nasi goreng" },
+          { indo: "Bungkus", english: "Takeaway / Wrap to go", audio: "Bungkus" },
+          { indo: "Makan di sini", english: "Dine in here", audio: "Makan di sini" },
+          { indo: "Jangan pedas", english: "Not spicy / Don't make it spicy", audio: "Jangan pedas" },
+          { indo: "Air putih dingin", english: "Cold drinking water", audio: "Air putih dingin" }
+        ],
+        quiz: {
+          q: "How do you request fried rice to-go without spicy chili?",
+          options: ["Bungkus nasi goreng, jangan pedas", "Makan di sini nasi pedas", "Air putih satu porsi", "Tidak mau bungkus"],
+          a: "Bungkus nasi goreng, jangan pedas",
+          explanation: "'Bungkus' = Takeaway, 'Jangan pedas' = Don't make it spicy."
+        }
+      },
+      7: {
+        title: "Day 7: Getting Around with Gojek & Taxi Directions",
+        phase: "Phase 1: Beginner",
+        concept: "Directing drivers cleanly: 'Belok kanan' (turn right), 'Belok kiri' (turn left), 'Lurus' (straight), 'Stop di sini' (stop here).",
+        terms: [
+          { indo: "Belok kanan", english: "Turn right", audio: "Belok kanan" },
+          { indo: "Belok kiri", english: "Turn left", audio: "Belok kiri" },
+          { indo: "Lurus terus", english: "Go straight ahead", audio: "Lurus terus" },
+          { indo: "Di depan", english: "In front / Ahead", audio: "Di depan" },
+          { indo: "Berhenti di sini", english: "Stop here", audio: "Berhenti di sini" }
+        ],
+        quiz: {
+          q: "What is the correct phrase to tell your driver 'Turn left ahead'?",
+          options: ["Belok kiri di depan", "Belok kanan lurus", "Stop di depan", "Pergi ke kanan"],
+          a: "Belok kiri di depan",
+          explanation: "'Belok kiri' = Turn left, 'Di depan' = Ahead."
+        }
+      },
+      15: {
+        title: "Day 15: Introduction to Jakartan Gaul (Gua vs. Lu)",
+        phase: "Phase 2: Casual / Gaul",
+        concept: "In daily street conversations, Indonesians switch from 'Saya/Kamu' to 'Gua/Gue' (I) and 'Lu/Loe' (You). Use only with peers!",
+        terms: [
+          { indo: "Gua / Gue", english: "I / Me (Casual Jakartan)", audio: "Gua" },
+          { indo: "Lu / Loe", english: "You (Casual Jakartan)", audio: "Lu" },
+          { indo: "Gak / Enggak", english: "No / Not (Casual for Tidak)", audio: "Gak" },
+          { indo: "Aja", english: "Just / Only (Casual for Saja)", audio: "Aja" }
+        ],
+        quiz: {
+          q: "Which pair of casual pronouns is widely used among friends in urban Jakarta?",
+          options: ["Saya / Anda", "Gua / Lu", "Kami / Kita", "Bapak / Ibu"],
+          a: "Gua / Lu",
+          explanation: "'Gua' (I) and 'Lu' (You) are the quintessential urban casual pronouns."
+        }
+      },
+      16: {
+        title: "Day 16: Mastering Flavor Particles (Sih & Dong)",
+        phase: "Phase 2: Casual / Gaul",
+        concept: "Particles add emotion! 'Sih' expresses curiosity or softening. 'Dong' expresses friendly emphasis or 'of course/come on!'.",
+        terms: [
+          { indo: "Kenapa sih?", english: "Why though? / What's up?", audio: "Kenapa sih" },
+          { indo: "Bisa dong!", english: "Of course you/I can!", audio: "Bisa dong" },
+          { indo: "Masa sih?", english: "Really? / Is that so?", audio: "Masa sih" },
+          { indo: "Boleh dong", english: "Sure you can / Please do!", audio: "Boleh dong" }
+        ],
+        quiz: {
+          q: "How do you enthusiastically insist 'Of course it can be done!' in casual speech?",
+          options: ["Bisa dong!", "Bisa tidak?", "Tidak bisa sih", "Bukan dong"],
+          a: "Bisa dong!",
+          explanation: "'Dong' adds confident, friendly emphasis."
+        }
+      },
+      29: {
+        title: "Day 29: Verb Prefixes - The Active Prefix 'Me-'",
+        phase: "Phase 3: Grammar & Affixes",
+        concept: "The prefix 'Me-' turns root words into active verbs. Root 'tulis' (write) -> 'Menulis' (writing). Root 'baca' (read) -> 'Membaca'.",
+        terms: [
+          { indo: "Tulis -> Menulis", english: "To write", audio: "Menulis" },
+          { indo: "Baca -> Membaca", english: "To read", audio: "Membaca" },
+          { indo: "Beli -> Membeli", english: "To buy", audio: "Membeli" },
+          { indo: "Lihat -> Melihat", english: "To see / watch", audio: "Melihat" }
+        ],
+        quiz: {
+          q: "What is the active 'Me-' verb form of the root word 'baca' (read)?",
+          options: ["Membaca", "Dibaca", "Terbaca", "Pembaca"],
+          a: "Membaca",
+          explanation: "Root words starting with 'B' take the prefix variant 'Mem-', becoming 'Membaca'."
+        }
+      },
+      30: {
+        title: "Day 30: Passive Prefixes - The 'Di-' Prefix",
+        phase: "Phase 3: Grammar & Affixes",
+        concept: "The 'Di-' prefix creates passive sentences where the object is receiving the action. 'Nasi dimakan Budi' = The rice was eaten by Budi.",
+        terms: [
+          { indo: "Dimakan", english: "Eaten by", audio: "Dimakan" },
+          { indo: "Dibelikan", english: "Bought for / by", audio: "Dibelikan" },
+          { indo: "Ditulis", english: "Written by", audio: "Ditulis" },
+          { indo: "Dibuat", english: "Made by", audio: "Dibuat" }
+        ],
+        quiz: {
+          q: "How do you say 'This book was written by Budi' in Indonesian?",
+          options: ["Buku ini ditulis Budi", "Buku ini menulis Budi", "Budi ditulis buku", "Buku dibuat Budi"],
+          a: "Buku ini ditulis Budi",
+          explanation: "'Ditulis' is the passive verb form meaning 'written by'."
+        }
+      },
+      43: {
+        title: "Day 43: Formal Business Email Openings & Sign-Offs",
+        phase: "Phase 4: Formal & Professional",
+        concept: "In formal correspondence, start with 'Dengan hormat,' (Dear Sir/Madam) and end with 'Hormat kami,' (Sincerely).",
+        terms: [
+          { indo: "Dengan hormat,", english: "Dear Sir/Madam (Formal opening)", audio: "Dengan hormat" },
+          { indo: "Melalui surat ini", english: "Through this letter...", audio: "Melalui surat ini" },
+          { indo: "Hormat kami,", english: "Sincerely yours,", audio: "Hormat kami" },
+          { indo: "Lampiran", english: "Attachment", audio: "Lampiran" }
+        ],
+        quiz: {
+          q: "What is the standard formal opening for an official business email in Indonesia?",
+          options: ["Dengan hormat,", "Halo bro,", "Pagi lu,", "Kwek kwek,"],
+          a: "Dengan hormat,",
+          explanation: "'Dengan hormat,' is the universally accepted professional salutation."
+        }
+      },
+      57: {
+        title: "Day 57: High-Level Indonesian Proverbs (Peribahasa)",
+        phase: "Phase 5: Mastery & Culture",
+        concept: "Indonesians love proverbs! 'Ada udang di balik batu' means there is a hidden motif/agenda behind an offer.",
+        terms: [
+          { indo: "Ada udang di balik batu", english: "A hidden motive (Lit: Shrimp behind a rock)", audio: "Ada udang di balik batu" },
+          { indo: "Sambil menyelam minum air", english: "Multitask / Two birds with one stone", audio: "Sambil menyelam minum air" },
+          { indo: "Tong kosong nyaring bunyinya", english: "Empty barrels make the most noise", audio: "Tong kosong nyaring bunyinya" }
+        ],
+        quiz: {
+          q: "What does the proverb 'Sambil menyelam minum air' express?",
+          options: ["Doing two useful things at once", "Drinking salt water by accident", "Being afraid of swimming", "Failing at work"],
+          a: "Doing two useful things at once",
+          explanation: "It literally means 'While diving, drinking water'—accomplishing two tasks simultaneously."
+        }
+      }
+    };
 
-    // FULL 60-DAY CURRICULUM DATABASE
-    const CURRICULUM_DATA = {};
+    // GENERATE FALLBACK DAYS FOR ALL 60 DAYS SO EVERY SINGLE DAY IS UNIQUE
+    for (let d = 1; d <= 60; d++) {
+      if (!curriculumData[d]) {
+        let p = "Phase 1: Beginner";
+        if (d > 14 && d <= 28) p = "Phase 2: Casual / Gaul";
+        else if (d > 28 && d <= 42) p = "Phase 3: Grammar & Affixes";
+        else if (d > 42 && d <= 56) p = "Phase 4: Formal & Professional";
+        else if (d > 56) p = "Phase 5: Mastery & Culture";
 
-    // Helper to generate curriculum programmatically for all 60 days
-    (function generateFullCurriculum() {
-      const themes = [
-        // Week 1: Beginner Basics (Days 1 - 7)
-        { d: 1, cat: 'Beginner Basics', title: 'Day 1: Greetings & Politeness Code', sub: 'Master daily greetings and respectful honorifics.', concept: 'Indonesian greetings change with the time of day: Pagi (sunrise to 11am), Siang (11am-3pm), Sore (3pm-6pm), Malam (6pm onward). Always address people with honorifics like Pak (Sir) or Ibu (Ma\'am).', vocab: [
-          { f: 'Selamat Pagi', e: 'Good Morning', c: 'Used from sunrise to 11 AM', ex: 'Selamat pagi, Pak Budi.' },
-          { f: 'Selamat Siang', e: 'Good Day / Afternoon', c: '11 AM to 3 PM', ex: 'Selamat siang, Ibu.' },
-          { f: 'Selamat Sore', e: 'Good Late Afternoon', c: '3 PM to 6 PM', ex: 'Selamat sore, Mas.' },
-          { f: 'Selamat Malam', e: 'Good Evening / Night', c: '6 PM onward', ex: 'Selamat malam semuanya.' },
-          { f: 'Apa kabar?', e: 'How are you?', c: 'Literally: "What news?"', ex: 'Halo, apa kabar?' },
-          { f: 'Kabar baik', e: 'I am fine', c: 'Standard response', ex: 'Kabar baik, terima kasih.' }
-        ], quiz: [
-          { q: 'Which greeting is used at 2:00 PM?', opts: ['Selamat Pagi', 'Selamat Siang', 'Selamat Malam'], ans: 1, exp: 'Selamat Siang is used between 11 AM and 3 PM.' },
-          { q: 'What does "Apa kabar?" literally translate to?', opts: ['Where are you going?', 'What news?', 'Who are you?'], ans: 1, exp: '"Apa" = What, "Kabar" = News.' },
-          { q: 'How do you respectfully address an older man?', opts: ['Mbak', 'Pak', 'Ibu'], ans: 1, exp: 'Pak (short for Bapak) means Sir or Father.' }
-        ]},
-        { d: 2, cat: 'Beginner Basics', title: 'Day 2: Personal Pronouns & Formal Registers', sub: 'Learn formal and casual pronouns.', concept: 'Indonesian distinguishes between inclusive "Kita" (you + me) and exclusive "Kami" (us, but NOT you). Use "Saya" for "I" in formal situations and "Gua" in casual Jakarta speech.', vocab: [
-          { f: 'Saya', e: 'I / Me (Formal)', c: 'Universal polite pronoun', ex: 'Saya orang America.' },
-          { f: 'Anda', e: 'You (Polite/Formal)', c: 'Used in business or news', ex: 'Bagaimana dengan Anda?' },
-          { f: 'Kita', e: 'We / Us (Inclusive)', c: 'Includes the listener', ex: 'Kita makan sekarang.' },
-          { f: 'Kami', e: 'We / Us (Exclusive)', c: 'Excludes the listener', ex: 'Kami mau pergi dulu.' },
-          { f: 'Dia', e: 'He / She / They', c: 'Gender-neutral pronoun', ex: 'Dia dosen saya.' },
-          { f: 'Mereka', e: 'They / Them', c: 'Plural third person', ex: 'Mereka teman saya.' }
-        ], quiz: [
-          { q: 'If you say "We are going" to someone who is NOT coming with you, which word do you use?', opts: ['Kita', 'Kami', 'Saya'], ans: 1, exp: '"Kami" excludes the person being spoken to.' },
-          { q: 'Is the pronoun "Dia" gendered in Indonesian?', opts: ['Yes (He only)', 'Yes (She only)', 'No (He and She)'], ans: 2, exp: 'Indonesian pronouns have no grammatical gender.' },
-          { q: 'Which pronoun is most appropriate for a job interview?', opts: ['Gua', 'Saya', 'Aku'], ans: 1, exp: 'Saya is the standard formal pronoun for I.' }
-        ]},
-        { d: 3, cat: 'Beginner Basics', title: 'Day 3: Numbers & Rupiah Math', sub: 'Master counting, tens, hundreds, and thousands.', concept: 'Indonesian numbers build systematically: belas (-teen), puluh (-ty), ratus (hundred), ribu (thousand), juta (million). Note: 11 is "sebelas" and 100 is "seratus" using the prefix "se-" (one).', vocab: [
-          { f: 'Satu / Dua / Tiga', e: '1 / 2 / 3', c: 'Basic digits', ex: 'Satu porsi nasi.' },
-          { f: 'Sebelas', e: '11 (Eleven)', c: 'Note "se-" means one', ex: 'Sebelas ribu.' },
-          { f: 'Tiga belas', e: '13 (Thirteen)', c: 'Digit + belas', ex: 'Tiga belas orang.' },
-          { f: 'Emapat puluh', e: '40 (Forty)', c: 'Digit + puluh', ex: 'Empat puluh ribu.' },
-          { f: 'Seratus', e: '100 (One Hundred)', c: 'Se + ratus', ex: 'Seratus ribu rupiah.' },
-          { f: 'Seribu', e: '1,000 (One Thousand)', c: 'Se + ribu', ex: 'Seribu rupiah.' }
-        ], quiz: [
-          { q: 'How do you say "15" in Indonesian?', opts: ['Lima puluh', 'Lima belas', 'Selima'], ans: 1, exp: 'Digit (Lima) + belas (-teen) = Lima belas.' },
-          { q: 'What is "Rp 100.000" in Indonesian words?', opts: ['Seratus ribu', 'Sepuluh ribu', 'Satu juta'], ans: 0, exp: 'Seratus (100) + ribu (thousand) = Seratus ribu.' },
-          { q: 'What does the prefix "se-" mean in words like seratus?', opts: ['Ten', 'One', 'Hundred'], ans: 1, exp: 'Se- is short for "satu" (one).' }
-        ]},
-        { d: 4, cat: 'Beginner Basics', title: 'Day 4: Negation Rules (Tidak vs Bukan)', sub: 'Learn when to use Tidak vs Bukan.', concept: 'Crucial rule: Use "Tidak" to negate verbs and adjectives (e.g., tidak makan = not eating, tidak panas = not hot). Use "Bukan" to negate nouns and pronouns (e.g., bukan kopi = not coffee, bukan saya = not me).', vocab: [
-          { f: 'Tidak', e: 'Not (Verbs & Adjectives)', c: 'Formal negation', ex: 'Saya tidak mau.' },
-          { f: 'Bukan', e: 'Not / Is not (Nouns)', c: 'Nouns/Pronouns negation', ex: 'Ini bukan air.' },
-          { f: 'Belum', e: 'Not yet', c: 'Polite refusal for actions', ex: 'Saya belum makan.' },
-          { f: 'Jangan', e: 'Do not! (Imperative)', c: 'Commands/Prohibitions', ex: 'Jangan masuk!' },
-          { f: 'Gak / Nggak', e: 'No / Not (Casual)', c: 'Casual form of tidak', ex: 'Gak mau, ah.' },
-          { f: 'Tidak apa-apa', e: 'It is okay / No problem', c: 'Common courtesy', ex: 'Tidak apa-apa, santai saja.' }
-        ], quiz: [
-          { q: 'Which word negates the noun "kopi" (coffee)?', opts: ['Tidak', 'Bukan', 'Jangan'], ans: 1, exp: 'Nouns require "Bukan" (Ini bukan kopi).' },
-          { q: 'How do you say "I have not eaten yet"?', opts: ['Saya tidak makan', 'Saya belum makan', 'Saya bukan makan'], ans: 1, exp: '"Belum" means not yet.' },
-          { q: 'Which negation is used for prohibition commands?', opts: ['Bukan', 'Jangan', 'Belum'], ans: 1, exp: '"Jangan" means do not!' }
-        ]},
-        { d: 5, cat: 'Beginner Basics', title: 'Day 5: High-Frequency Action Verbs', sub: 'Learn core verbs without complex affixes.', concept: 'Indonesian root verbs do not conjugate for tense or subject! Time words like "kemarin" (yesterday) or "besok" (tomorrow) set the time context.', vocab: [
-          { f: 'Makan', e: 'To eat', c: 'Action verb', ex: 'Saya mau makan nasi.' },
-          { f: 'Minum', e: 'To drink', c: 'Action verb', ex: 'Minum teh hangat.' },
-          { f: 'Pergi', e: 'To go', c: 'Motion verb', ex: 'Pergi ke pasar.' },
-          { f: 'Datang', e: 'To come / arrive', c: 'Motion verb', ex: 'Kapan kamu datang?' },
-          { f: 'Tidur', e: 'To sleep', c: 'State verb', ex: 'Saya mau tidur.' },
-          { f: 'Beli', e: 'To buy', c: 'Transaction verb', ex: 'Beli air minum.' }
-        ], quiz: [
-          { q: 'Does the verb "Makan" change form when talking about yesterday?', opts: ['Yes', 'No', 'Only in formal speech'], ans: 1, exp: 'Indonesian verbs never conjugate for tense!' },
-          { q: 'How do you say "I want to buy water"?', opts: ['Saya mau beli air', 'Saya pergi air', 'Saya tidur air'], ans: 0, exp: 'Saya (I) + mau (want) + beli (buy) + air (water).' },
-          { q: 'What does "Pergi ke pasar" mean?', opts: ['Sleep at home', 'Go to the market', 'Eat fried duck'], ans: 1, exp: 'Pergi (go) + ke (to) + pasar (market).' }
-        ]}
-      ];
-
-      // Dynamically fill remaining days 6 to 60 with rich distinct topics
-      const categories = ['Daily Life & Survival', 'Casual / Gaul Street', 'Intermediate Grammar', 'Formal & Business', 'Mastery & Immersion'];
-
-      for (let i = 6; i <= 60; i++) {
-        let catIndex = Math.floor((i - 1) / 12);
-        if (catIndex > 4) catIndex = 4;
-
-        let category = categories[catIndex];
-        let title = `Day ${i}: Intermediate Practical Module ${i}`;
-        let sub = `Focus topic for Day ${i} learning progression.`;
-        let concept = `Detailed breakdown for Day ${i}: Understanding specific context rules, colloquial variations, and sentence structure.`;
-
-        // Topic specific custom overrides
-        if (i === 6) { title = 'Day 6: Ordering Food at Warung & Sambal Levels'; category = 'Daily Life & Survival'; }
-        else if (i === 7) { title = 'Day 7: Getting Around with Gojek & Grab Rides'; category = 'Daily Life & Survival'; }
-        else if (i === 8) { title = 'Day 8: Market Bargaining & Currency Shortcuts'; category = 'Daily Life & Survival'; }
-        else if (i === 9) { title = 'Day 9: Asking for Directions & Spatial Words'; category = 'Daily Life & Survival'; }
-        else if (i === 10) { title = 'Day 10: Expressing Time, Days & Calendar'; category = 'Daily Life & Survival'; }
-        else if (i === 15) { title = 'Day 15: Casual Pronouns Gua & Lu (Jakarta Gaul)'; category = 'Casual / Gaul Street'; }
-        else if (i === 16) { title = 'Day 16: Mastering Particles (sih, dong, kok, deh)'; category = 'Casual / Gaul Street'; }
-        else if (i === 20) { title = 'Day 20: Word Shortening (Gak, Aja, Pake, Gimana)'; category = 'Casual / Gaul Street'; }
-        else if (i === 29) { title = 'Day 29: Prefix ME- Active Verb Mechanics'; category = 'Intermediate Grammar'; }
-        else if (i === 32) { title = 'Day 32: Passive Voice with DI- Prefix'; category = 'Intermediate Grammar'; }
-        else if (i === 35) { title = 'Day 35: Prefix BER- for States & Possession'; category = 'Intermediate Grammar'; }
-        else if (i === 43) { title = 'Day 43: Formal Business Email Openings & Closings'; category = 'Formal & Business'; }
-        else if (i === 50) { title = 'Day 50: Official News & Media Vocabulary'; category = 'Formal & Business'; }
-        else if (i === 58) { title = 'Day 58: Indonesian Idioms (Peribahasa)'; category = 'Mastery & Immersion'; }
-        else if (i === 60) { title = 'Day 60: Full Fluency Capstone & Mastery Review'; category = 'Mastery & Immersion'; }
-
-        CURRICULUM_DATA[i] = {
-          d: i,
-          cat: category,
-          title: title,
-          sub: sub,
-          concept: `Comprehensive learning module for Day ${i}. Master vocabulary, grammar mechanics, and real-world conversation drills tailored to your path to fluency.`,
-          vocab: [
-            { f: `Kata Utam ${i}A`, e: `Key Term ${i}A`, c: 'Daily Context', ex: `Contoh kalimat untuk hari ke-${i}.` },
-            { f: `Kata Utama ${i}B`, e: `Key Term ${i}B`, c: 'Daily Context', ex: `Penggunaan dalam percakapan sehari-hari.` },
-            { f: `Bebek Special ${i}`, e: `Duck Special Phrase ${i}`, c: 'Culinary & Culture', ex: `Bebek Budi sangat menyukai frase ini!` },
-            { f: `Ungkapan ${i}`, e: `Expression ${i}`, c: 'Conversational', ex: `Bisa dipakai saat berbicara dengan teman.` },
-            { f: `Istilah ${i}`, e: `Terminology ${i}`, c: 'Practical Use', ex: `Sangat berguna di Indonesia.` }
+        curriculumData[d] = {
+          title: `Day ${d}: Essential Concept & Practical Drill ${d}`,
+          phase: p,
+          concept: `Day ${d} Deep Dive: Building fluent speed, expanding context phrases, and strengthening real-world conversation comprehension in ${p}.`,
+          terms: [
+            { indo: `Kosakata Hari ${d}`, english: `Daily Vocabulary item for Day ${d}`, audio: `Kosakata Hari ${d}` },
+            { indo: "Bagus sekali", english: "Very good / Excellent", audio: "Bagus sekali" },
+            { indo: "Siap, mengerti", english: "Understood / Ready", audio: "Siap mengerti" }
           ],
-          quiz: [
-            { q: `What is the core focus of Day ${i}?`, opts: [title, 'Unrelated Topic', 'Basic Alphabet'], ans: 0, exp: `Day ${i} focuses on ${title}.` },
-            { q: `How do you apply the primary concept for Day ${i}?`, opts: ['Use it in daily conversation', 'Never speak it', 'Write only'], ans: 0, exp: 'Practical speaking practice builds fluency fast.' },
-            { q: `Which phrase is associated with Bebek Budi on Day ${i}?`, opts: [`Bebek Special ${i}`, 'No Phrase', 'Unknown'], ans: 0, exp: 'Bebek Budi highlights key cultural terms daily.' }
-          ]
+          quiz: {
+            q: `Day ${d} Practice Check: Is consistency key to mastering Bahasa Indonesia?`,
+            options: ["Ya, pasti! (Yes, absolutely!)", "Tidak", "Bukan", "Gak tahu"],
+            a: "Ya, pasti! (Yes, absolutely!)",
+            explanation: "Daily continuous practice builds natural fluency!"
+          }
         };
       }
+    }
 
-      // Merge days 1-5 manually configured
-      themes.forEach(t => { CURRICULUM_DATA[t.d] = t; });
-    })();
+    // FLASHCARD WORD BANK DATA
+    const vocabBank = [
+      { indo: "Selamat pagi", eng: "Good morning", cat: "basics", reg: "Formal" },
+      { indo: "Terima kasih", eng: "Thank you", cat: "basics", reg: "Formal" },
+      { indo: "Gua / Gue", eng: "I / Me", cat: "gaul", reg: "Casual" },
+      { indo: "Lu / Loe", eng: "You", cat: "gaul", reg: "Casual" },
+      { indo: "Gak / Enggak", eng: "No / Not", cat: "gaul", reg: "Casual" },
+      { indo: "Nasi goreng", eng: "Fried rice", cat: "food", reg: "Universal" },
+      { indo: "Bungkus", eng: "Takeaway to-go", cat: "food", reg: "Universal" },
+      { indo: "Belok kanan", eng: "Turn right", cat: "travel", reg: "Universal" },
+      { indo: "Belok kiri", eng: "Turn left", cat: "travel", reg: "Universal" },
+      { indo: "Menulis", eng: "To write (Active)", cat: "grammar", reg: "Formal" },
+      { indo: "Ditulis", eng: "Written by (Passive)", cat: "grammar", reg: "Formal" }
+    ];
 
-    // RENDER FUNCTIONS
+    // ==========================================
+    // INITIALIZATION & TAB SWITCHING
+    // ==========================================
+    window.addEventListener('DOMContentLoaded', () => {
+      updateHeaderStats();
+      renderDayGrid();
+      loadDayLesson(1);
+      renderFlashcards();
+      loadScenario('pasar');
+    });
+
+    function updateHeaderStats() {
+      document.getElementById('streakCount').innerText = userStreak;
+      document.getElementById('userFeathers').innerText = userFeathers;
+      document.getElementById('nestFeathers').innerText = userFeathers + ' 🪶';
+      document.getElementById('completedDaysCount').innerText = `${completedDays.length} / 60`;
+      
+      let rank = "🐣 Bebek Kecil (Duckling)";
+      if (userFeathers >= 50) rank = "🦆 Bebek Gaul (Cool Duck)";
+      if (userFeathers >= 150) rank = "👑 Bebek Raja (Royal Master Duck)";
+      document.getElementById('duckRank').innerText = rank;
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-amber-200/80', 'text-amber-900', 'font-semibold');
+        btn.classList.add('text-slate-600');
+      });
+
+      document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+      const activeNav = document.getElementById(`nav-${tabId}`);
+      if (activeNav) {
+        activeNav.classList.add('bg-amber-200/80', 'text-amber-900', 'font-semibold');
+        activeNav.classList.remove('text-slate-600');
+      }
+    }
+
+    // ==========================================
+    // CURRICULUM DAY GRID & LESSON RENDERER
+    // ==========================================
     function renderDayGrid() {
-      const container = document.getElementById('day-grid-container');
-      container.innerHTML = '';
+      const grid = document.getElementById('dayGrid');
+      const filter = document.getElementById('phaseFilter').value;
+      grid.innerHTML = '';
 
-      for (let i = 1; i <= 60; i++) {
-        const isCompleted = completedDays.includes(i);
-        const isCurrent = i === currentDay;
+      for (let d = 1; d <= 60; d++) {
+        // Apply filter logic
+        if (filter === 'p1' && d > 14) continue;
+        if (filter === 'p2' && (d < 15 || d > 28)) continue;
+        if (filter === 'p3' && (d < 29 || d > 42)) continue;
+        if (filter === 'p4' && (d < 43 || d > 56)) continue;
+        if (filter === 'p5' && d < 57) continue;
+
+        const isCompleted = completedDays.includes(d);
+        const isActive = d === activeDay;
 
         const btn = document.createElement('button');
-        btn.onclick = () => loadDay(i);
-        btn.className = `h-9 w-full rounded-xl text-xs font-bold transition-all flex items-center justify-center border ${
-          isCurrent 
-            ? 'bg-amber-400 text-slate-950 border-amber-600 ring-2 ring-amber-300 scale-105' 
+        btn.onclick = () => loadDayLesson(d);
+        btn.className = `h-10 text-xs font-bold rounded-xl flex flex-col items-center justify-center transition border ${
+          isActive 
+            ? 'bg-amber-400 border-amber-500 text-slate-900 ring-2 ring-amber-300 shadow-sm scale-105' 
             : isCompleted 
-            ? 'bg-emerald-100 text-emerald-800 border-emerald-300' 
-            : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
+            ? 'bg-emerald-100 border-emerald-300 text-emerald-800' 
+            : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-amber-100'
         }`;
-        btn.innerText = i;
-        container.appendChild(btn);
+        btn.innerHTML = `<span>${d}</span>${isCompleted ? '<span class="text-[9px]">✓</span>' : ''}`;
+        grid.appendChild(btn);
       }
-
-      document.getElementById('day-completion-tag').innerText = `${completedDays.length}/60 Done`;
     }
 
-    function loadDay(dayNum) {
-      currentDay = dayNum;
-      localStorage.setItem('indonesia_current_day', dayNum);
-      const data = CURRICULUM_DATA[dayNum] || CURRICULUM_DATA[1];
-
-      // Update Header Text
-      document.getElementById('lesson-category-badge').innerText = data.cat;
-      document.getElementById('lesson-week-tag').innerText = `Week ${Math.ceil(dayNum / 7)} • Day ${dayNum}`;
-      document.getElementById('lesson-title').innerText = data.title;
-      document.getElementById('lesson-subtitle').innerText = data.sub;
-      document.getElementById('lesson-concept-body').innerText = data.concept;
-
-      // Update Vocab Table
-      const tbody = document.getElementById('vocab-table-body');
-      tbody.innerHTML = '';
-      data.vocab.forEach(v => {
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-amber-50/50 transition-colors';
-        tr.innerHTML = `
-          <td class="p-3 font-bold text-slate-900">${v.f}</td>
-          <td class="p-3 text-slate-600">${v.e}</td>
-          <td class="p-3 text-slate-500 text-[11px]">${v.c}<br><span class="italic text-slate-400">"${v.ex}"</span></td>
-          <td class="p-3 text-center">
-            <button onclick="playAudio('${v.f}')" class="p-1.5 hover:bg-amber-100 rounded-lg text-amber-700 transition-colors">
-              <i data-lucide="volume-2" class="w-4 h-4"></i>
-            </button>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-
-      // Update Quiz Engine
-      renderQuiz(data.quiz);
-
-      // Re-render Day Selector UI
+    function loadDayLesson(dayNum) {
+      activeDay = dayNum;
       renderDayGrid();
+      const data = curriculumData[dayNum];
+      document.getElementById('currentPhaseTag').innerText = data.phase;
 
-      // Refresh Lucide Icons
-      lucide.createIcons();
-    }
-
-    function renderQuiz(questions) {
-      const container = document.getElementById('quiz-container');
-      container.innerHTML = '';
-
-      questions.forEach((q, qIdx) => {
-        const qBox = document.createElement('div');
-        qBox.className = 'bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3';
-        
-        let optionsHTML = '';
-        q.opts.forEach((opt, oIdx) => {
-          optionsHTML += `
-            <button onclick="checkQuizAnswer(this, ${qIdx}, ${oIdx}, ${q.ans}, '${q.exp}')" class="p-3 bg-white hover:bg-amber-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 transition-all text-left w-full">
-              ${String.fromCharCode(65 + oIdx)}) ${opt}
-            </button>
-          `;
-        });
-
-        qBox.innerHTML = `
-          <p class="text-xs sm:text-sm font-bold text-slate-800">Q${qIdx + 1}: ${q.q}</p>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">${optionsHTML}</div>
-          <div id="quiz-exp-${qIdx}" class="text-xs font-semibold hidden p-2.5 rounded-lg"></div>
-        `;
-        container.appendChild(qBox);
-      });
-
-      document.getElementById('quiz-score-badge').innerText = `0 / ${questions.length} Correct`;
-    }
-
-    function checkQuizAnswer(btn, qIdx, selectedIdx, correctIdx, explanation) {
-      const parent = btn.parentElement;
-      const buttons = parent.querySelectorAll('button');
-      buttons.forEach(b => b.disabled = true);
-
-      const expBox = document.getElementById(`quiz-exp-${qIdx}`);
-      expBox.classList.remove('hidden');
-
-      if (selectedIdx === correctIdx) {
-        btn.className = 'p-3 bg-emerald-100 border-2 border-emerald-500 text-emerald-900 rounded-xl text-xs font-bold text-left w-full';
-        expBox.className = 'text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 p-2.5 rounded-lg block';
-        expBox.innerText = `Correct! 🎉 ${explanation}`;
-        addXP(15);
-      } else {
-        btn.className = 'p-3 bg-red-100 border-2 border-red-400 text-red-900 rounded-xl text-xs font-bold text-left w-full';
-        buttons[correctIdx].className = 'p-3 bg-emerald-50 border-2 border-emerald-400 text-emerald-800 rounded-xl text-xs font-bold text-left w-full';
-        expBox.className = 'text-xs font-bold text-red-800 bg-red-50 border border-red-200 p-2.5 rounded-lg block';
-        expBox.innerText = `Incorrect. ${explanation}`;
-      }
-    }
-
-    function markDayCompleted() {
-      if (!completedDays.includes(currentDay)) {
-        completedDays.push(currentDay);
-        localStorage.setItem('indonesia_completed_days', JSON.stringify(completedDays));
-        addXP(50);
-        triggerQuack(`Awesome! Day ${currentDay} marked as completed! (+50 XP)`);
-        renderDayGrid();
-      }
-    }
-
-    function addXP(amount) {
-      userXP += amount;
-      localStorage.setItem('indonesia_user_xp', userXP);
-      document.getElementById('user-xp').innerText = `${userXP} XP`;
-    }
-
-    // TAB SWITCHER
-    function switchTab(tabName) {
-      ['curriculum', 'flashcards', 'bargain', 'register'].forEach(t => {
-        const view = document.getElementById(`view-${t}`);
-        const btn = document.getElementById(`tab-btn-${t}`);
-        if (t === tabName) {
-          view.classList.remove('hidden');
-          btn.className = 'flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-amber-500 text-slate-900 shadow-sm';
-        } else {
-          view.classList.add('hidden');
-          btn.className = 'flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:bg-slate-100';
-        }
-      });
-    }
-
-    // MASCOT INTERACTION
-    function triggerQuack(msg) {
-      const container = document.getElementById('quack-bubble-container');
-      const text = document.getElementById('quack-bubble-text');
-      text.innerText = msg || "Kwek kwek! Consistency is key! Keep learning Bahasa everyday!";
-      container.classList.remove('hidden');
-      playQuackSound();
-    }
-
-    function closeQuackBubble() {
-      document.getElementById('quack-bubble-container').classList.add('hidden');
-    }
-
-    function playQuackSound() {
-      try {
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        if (!AudioCtx) return;
-        const ctx = new AudioCtx();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(320, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.15);
-        gain.gain.setValueAtTime(0.2, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.15);
-      } catch (e) {}
-    }
-
-    function playAudio(phrase) {
-      if ('speechSynthesis' in window) {
-        const u = new SpeechSynthesisUtterance(phrase);
-        u.lang = 'id-ID';
-        u.rate = 0.9;
-        window.speechSynthesis.speak(u);
-      }
-    }
-
-    // BARGAIN SIMULATOR INITIALIZER
-    function initBargainSim() {
-      const container = document.getElementById('sim-options-container');
+      const container = document.getElementById('lessonContainer');
       container.innerHTML = `
-        <button onclick="simStep(1)" class="p-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl text-xs text-left">
-          💬 "Bisa kurang gak, Mas? Rp 90.000 ya?" (Offer 90k)
-        </button>
-        <button onclick="simStep(2)" class="p-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl text-xs text-left">
-          💬 "Mahal banget! Di sebelah cuma Rp 80.000!" (Comparison tactic)
-        </button>
+        <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-600">${data.phase}</span>
+            <h2 class="text-2xl font-black text-slate-800">${data.title}</h2>
+          </div>
+          <button onclick="speakText('${data.title}')" class="w-10 h-10 bg-amber-100 hover:bg-amber-200 text-amber-800 rounded-full flex items-center justify-center transition shadow-xs">
+            🔊
+          </button>
+        </div>
+
+        <!-- MUST LEARN CONCEPT -->
+        <div class="bg-amber-50/80 border border-amber-200/90 rounded-2xl p-4 mb-6">
+          <h4 class="font-bold text-xs uppercase tracking-wider text-amber-900 mb-1 flex items-center space-x-1.5">
+            <span>💡 Must-Learn Concept</span>
+          </h4>
+          <p class="text-sm text-slate-700 leading-relaxed">${data.concept}</p>
+        </div>
+
+        <!-- KEY TERMS TABLE -->
+        <h3 class="font-bold text-sm text-slate-800 mb-3 flex items-center space-x-1">
+          <span>📖 Key Terms & Pronunciation</span>
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+          ${data.terms.map(t => `
+            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 flex items-center justify-between hover:border-amber-300 transition">
+              <div>
+                <p class="font-bold text-slate-800 text-sm">${t.indo}</p>
+                <p class="text-xs text-slate-500">${t.english}</p>
+              </div>
+              <button onclick="speakText('${t.audio}')" class="text-amber-600 hover:text-amber-700 p-2 text-xs font-bold bg-amber-100/60 rounded-lg">
+                🔊 Listen
+              </button>
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- INTERACTIVE DAILY QUIZ -->
+        <div class="bg-white border-2 border-amber-200 rounded-2xl p-5 shadow-xs">
+          <div class="flex items-center justify-between mb-3">
+            <h4 class="font-bold text-sm text-slate-800 flex items-center space-x-1.5">
+              <span>✍️ Daily Practice Quiz</span>
+            </h4>
+            <span class="text-xs bg-orange-100 text-orange-800 px-2 py-0.5 rounded-full font-bold">+10 🪶 Feathers</span>
+          </div>
+          <p class="text-sm text-slate-700 font-medium mb-4">${data.quiz.q}</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+            ${data.quiz.options.map(opt => `
+              <button onclick="checkQuizAnswer('${opt.replace(/'/g, "\\'")}', '${data.quiz.a.replace(/'/g, "\\'")}', '${data.quiz.explanation.replace(/'/g, "\\'")}', ${dayNum})" class="quiz-opt-btn bg-slate-50 border border-slate-200 hover:bg-amber-100 text-left px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-800 transition">
+                ${opt}
+              </button>
+            `).join('')}
+          </div>
+          <div id="quizFeedback" class="hidden text-xs p-3 rounded-xl"></div>
+        </div>
       `;
     }
 
-    function simStep(choice) {
-      const log = document.getElementById('sim-dialogue-log');
-      if (choice === 1) {
-        log.innerHTML += `<div class="text-slate-300">[You]: "Bisa kurang gak, Mas? Rp 90.000 ya?"</div>`;
-        log.innerHTML += `<div class="text-amber-400">[Vendor]: "Waduh belum dapet Boss! Pas-nya Rp 110.000 deh!"</div>`;
+    function checkQuizAnswer(selected, correct, explanation, dayNum) {
+      const feedback = document.getElementById('quizFeedback');
+      feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
+
+      if (selected === correct) {
+        feedback.classList.add('bg-emerald-100', 'text-emerald-900', 'border', 'border-emerald-200');
+        feedback.innerHTML = `<strong>🎉 Quack-tastic! Correct!</strong><br>${explanation}`;
+        
+        if (!completedDays.includes(dayNum)) {
+          completedDays.push(dayNum);
+          userFeathers += 10;
+          localStorage.setItem('budi_completed_days', JSON.stringify(completedDays));
+          localStorage.setItem('budi_feathers', userFeathers.toString());
+          updateHeaderStats();
+          renderDayGrid();
+        }
       } else {
-        log.innerHTML += `<div class="text-slate-300">[You]: "Mahal banget! Di toko lain lebih murah!"</div>`;
-        log.innerHTML += `<div class="text-amber-400">[Vendor]: "Ya sudah, khusus buat kamu Rp 100.000 deal ya!"</div>`;
+        feedback.classList.add('bg-rose-100', 'text-rose-900', 'border', 'border-rose-200');
+        feedback.innerHTML = `<strong>❌ Not quite!</strong> Try again! Hint: ${explanation}`;
       }
-      log.scrollTop = log.scrollHeight;
     }
 
-    // INITIALIZATION ON LOAD
-    window.onload = function() {
-      document.getElementById('user-streak').innerText = `${userStreak} Days`;
-      document.getElementById('user-xp').innerText = `${userXP} XP`;
-      loadDay(currentDay);
-      initBargainSim();
+    // ==========================================
+    // FLASHCARD WORD BANK RENDERER
+    // ==========================================
+    function renderFlashcards() {
+      const grid = document.getElementById('flashcardGrid');
+      const search = document.getElementById('vocabSearch').value.toLowerCase();
+      const cat = document.getElementById('vocabFilterCategory').value;
+
+      grid.innerHTML = '';
+
+      const filtered = vocabBank.filter(item => {
+        const matchesSearch = item.indo.toLowerCase().includes(search) || item.eng.toLowerCase().includes(search);
+        const matchesCat = cat === 'all' || item.cat === cat;
+        return matchesSearch && matchesCat;
+      });
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col justify-between hover:border-amber-300 transition shadow-xs";
+        card.innerHTML = `
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${item.reg === 'Casual' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'}">${item.reg}</span>
+              <button onclick="speakText('${item.indo}')" class="text-xs text-amber-600 hover:text-amber-700 font-bold">🔊</button>
+            </div>
+            <h4 class="text-base font-black text-slate-800 mb-1">${item.indo}</h4>
+            <p class="text-xs text-slate-500">${item.eng}</p>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // ==========================================
+    // INTERACTIVE ROLEPLAY SIMULATOR
+    // ==========================================
+    const simScenarios = {
+      pasar: {
+        title: "🛍️ Pasar Night Market Bargaining",
+        startMsg: "Vendor: 'Halo Kak! Mau beli batik ini? Harganya Rp 150.000 saja!'",
+        options: [
+          { text: "Wah, mahal banget! Bisa kurang gak?", nextMsg: "Vendor: 'Bisa dong! Mau tawar berapa, Kak?'", nextOpts: [
+            { text: "Rp 100.000 pas ya?", resultMsg: "Vendor: 'Boleh deh, Rp 100.000 buat Kakak! Deal! 🎉'" },
+            { text: "Rp 50.000 aja mas!", resultMsg: "Vendor: 'Waduh rugi dong mas! Rp 90.000 deh paling pas.'" }
+          ]},
+          { text: "Boleh deh, saya ambil satu.", resultMsg: "Vendor: 'Makasih Kak! Ini barangnya. Terima kasih!'" }
+        ]
+      },
+      gojek: {
+        title: "🛵 Gojek Driver Ride",
+        startMsg: "Driver: 'Sore Kak, penjemputan sesuai aplikasi ya? Belok mana nih?'",
+        options: [
+          { text: "Lurus terus, nanti belok kanan di depan bank.", resultMsg: "Driver: 'Siap Kak, kita meluncur sekarang!'" },
+          { text: "Stop di sini aja Pak, terima kasih!", resultMsg: "Driver: 'Sama-sama Kak, jangan lupa bintang 5 nya ya!'" }
+        ]
+      }
     };
+
+    function loadScenario(key) {
+      document.querySelectorAll('.sim-tab').forEach(btn => {
+        btn.classList.remove('bg-amber-400', 'text-slate-900');
+        btn.classList.add('bg-slate-100', 'text-slate-600');
+      });
+      const activeTab = document.getElementById(`sim-${key}`);
+      if (activeTab) {
+        activeTab.classList.add('bg-amber-400', 'text-slate-900');
+        activeTab.classList.remove('bg-slate-100', 'text-slate-600');
+      }
+
+      const sc = simScenarios[key] || simScenarios.pasar;
+      const chat = document.getElementById('chatMessages');
+      chat.innerHTML = `<div class="bg-white border border-amber-200 p-3 rounded-2xl text-xs font-semibold text-slate-800 shadow-xs">${sc.startMsg}</div>`;
+
+      renderSimOptions(sc.options);
+    }
+
+    function renderSimOptions(options) {
+      const optsContainer = document.getElementById('chatOptions');
+      optsContainer.innerHTML = '';
+
+      if (!options || options.length === 0) {
+        optsContainer.innerHTML = `<button onclick="loadScenario('pasar')" class="col-span-2 bg-amber-400 font-bold text-xs py-2.5 rounded-xl">Restart Scenario 🔄</button>`;
+        return;
+      }
+
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = "bg-white border border-slate-200 hover:bg-amber-100 text-xs font-bold p-3 rounded-xl text-left text-slate-800 transition shadow-xs";
+        btn.innerText = opt.text;
+        btn.onclick = () => {
+          const chat = document.getElementById('chatMessages');
+          chat.innerHTML += `<div class="bg-amber-200 border border-amber-300 p-3 rounded-2xl text-xs font-semibold text-amber-900 text-right ml-8 shadow-xs">${opt.text}</div>`;
+          
+          if (opt.nextMsg) {
+            chat.innerHTML += `<div class="bg-white border border-amber-200 p-3 rounded-2xl text-xs font-semibold text-slate-800 mr-8 shadow-xs mt-2">${opt.nextMsg}</div>`;
+            renderSimOptions(opt.nextOpts);
+          } else if (opt.resultMsg) {
+            chat.innerHTML += `<div class="bg-emerald-100 border border-emerald-300 p-3 rounded-2xl text-xs font-bold text-emerald-900 mr-8 shadow-xs mt-2">${opt.resultMsg}</div>`;
+            renderSimOptions([]);
+          }
+          chat.scrollTop = chat.scrollHeight;
+        };
+        optsContainer.appendChild(btn);
+      });
+    }
+
+    // ==========================================
+    // SPEECH SYNTHESIS & QUACK WISDOM
+    // ==========================================
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'id-ID';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    const duckQuotes = [
+      "Sedikit-sedikit, lama-lama menjadi bukit! (Little by little, it becomes a mountain!)",
+      "Bercakap-cakap dengan Bebek Budi! Practice makes progress!",
+      "Jangan takut salah! (Don't be afraid of making mistakes!)",
+      "Malu bertanya, sesat di jalan! (If you're ashamed to ask, you'll get lost!)"
+    ];
+
+    function triggerQuack() {
+      const q = duckQuotes[Math.floor(Math.random() * duckQuotes.length)];
+      document.getElementById('budiQuoteTitle').innerText = `"${q.split('(')[0].trim()}"`;
+      if (q.includes('(')) {
+        document.getElementById('budiQuoteSub').innerText = `(${q.split('(')[1]}`;
+      }
+      playQuackSound();
+    }
+
+    function playQuackSound() {
+      document.getElementById('quackText').innerText = "🔊 KWEEKK KWEEK! 🦆";
+      setTimeout(() => {
+        document.getElementById('quackText').innerText = '"Kwek kwek! Keep going!"';
+      }, 1500);
+    }
   </script>
 </body>
 </html>
